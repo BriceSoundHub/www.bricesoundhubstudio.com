@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Brice Sound Hub Studio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-image: url(images/pexels-david-bartus-43782-690779.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;
+            backdrop-filter: blur(1px);
+            font-family: 'inter';
+        }
+
+        nav {
+            background-color: #805620e0;
+            box-shadow: 3px 9px 5px rgba(0, 0, 0, 0.1);
+            height: 60px;
+        }
+
+        nav ul {
+            width: 100%;
+            list-style: none;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        nav li {
+            height: 50px;
+        }
+
+        nav a {
+            height: 100%;
+            padding: 0 30px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            color: rgb(255, 255, 255);
+        }
+
+        nav a:hover {
+            background-color: #d47216ab;
+        }
+
+        nav li:first-child {
+            margin-right: auto;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 250px;
+            z-index: 999;
+            background-color: #805620e0;
+            box-shadow: -10px 0 10px rgba(68, 46, 21, 0.185);
+            backdrop-filter: blur(10px);
+            display: none;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
+
+        .sidebar li {
+            width: 100%;
+        }
+
+        .sidebar a {
+            width: 100%;
+        }
+
+        .menu-button {
+            display: none;
+        }
+
+        @media (max-width: 960px) {
+            .hideOnMobile {
+                display: none;
+            }
+
+            .menu-button {
+                display: flex;
+            }
+
+            .services-list {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .service-card {
+                width: 40px;
+                margin: 20px 10px;
+            }
+
+            .contact-container {
+                margin: 0 auto;
+                width: 90%;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                margin-top: 10rem;
+            }
+
+            .map iframe {
+                height: 400px;
+                width: 400px;
+            }
+
+            .form-container {
+                width: 400px;
+            }
+
+            .whatsapp-button {
+                bottom: 10px;
+                right: 10px;
+                padding: 10px;
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 750px) {
+            .map iframe {
+                height: 350px;
+                width: 290px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .map iframe {
+                height: 250px;
+                width: 200px;
+            }
+        }
+
+        @media(max-width:400px) {
+            .sidebar {
+                width: 50%;
+            }
+
+            .service-card {
+                flex-direction: column;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                margin-top: 10rem;
+            }
+
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .welcome-text {
+            margin-bottom: 250px;
+            text-align: center;
+            margin-top: 150px;
+            opacity: 0;
+            animation: fadeIn 2s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .welcome-text h1 {
+            color: rgb(255, 255, 255);
+            font-weight: 600;
+            font-size: 36px;
+
+        }
+
+        .welcome-text h2 {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 48px;
+            margin-top: -15px;
+        }
+
+        .welcome-text p {
+            color: #ffffff;
+            font-size: 18px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #994d06b9;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #b15f12;
+        }
+
+        #about {
+            background: #8a5727e3;
+        }
+
+        .about-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+
+        }
+
+        .about-container h2 {
+            color: rgba(255, 255, 255, 0.788);
+            font-size: 36px;
+        }
+
+        .about-container p {
+            color: #ffffff;
+            line-height: 1.6;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        #services {
+            background-color: #5a3415f5;
+            padding: 50px 0;
+        }
+
+        .services-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .services-container h2 {
+            text-align: center;
+            color: white;
+        }
+
+        .services-list {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+
+        .service-card {
+            width: 30%;
+            height: 300px;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            border-radius: 11px;
+        }
+
+        .service-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: inherit;
+            filter: blur(2px);
+            z-index: 0;
+        }
+
+        .service-content {
+            position: relative;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .cta-button {
+            background-color: #ce6b0ebd;
+            color: rgb(255, 246, 246);
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 50px;
+        }
+
+        .cta-button:hover {
+            background-color: #7a4a1cb9;
+        }
+
+        #contact {
+            background-color: #805620;
+        }
+
+        .contact-container {
+            align-items: center;
+            align-content: content;
+            max-width: 960px;
+            margin: auto;
+            width: 100%;
+            overflow: hidden;
+
+        }
+
+        .contact-main {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            gap: 20px;
+        }
+
+        .form-container {
+            width: 400px;
+        }
+
+        .contact-main-title h6 {
+            font-weight: 600;
+            color: #804c21d3;
+            font-size: 40px;
+            margin-bottom: 5px;
+        }
+
+        .contact-main-title hr {
+            border: none;
+            width: 120px;
+            height: 5px;
+            background-color: rgb(255, 255, 255);
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .contact-inputs {
+            width: 400px;
+            height: 50px;
+            border: none;
+            outline: none;
+            padding-left: 25px;
+            font-weight: 500;
+            color: white;
+            border-radius: 50px;
+        }
+
+        .contact-main textarea {
+            height: 140px;
+            padding-top: 15px;
+            border-radius: 25px;
+        }
+
+        .contact-inputs:focus {
+            border: 2px solid #804c21d3;
+        }
+
+        .contact-inputs::placeholder {
+            color: rgb(8, 7, 15);
+        }
+
+        .contact-main button {
+            display: flex;
+            border: none;
+            font-size: 16px;
+            border-radius: 10px;
+            padding: 15px 30px;
+            gap: 10px;
+            color: #fffbfb;
+            align-items: center;
+            background-color: #ce6b0ebd;
+            cursor: pointer;
+        }
+
+        .contact-main button:hover {
+            background-color: #a1612dc7;
+        }
+
+        .map-container {
+            background-color: #805620;
+            flex-direction: column;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .map {
+            margin-bottom: 30px;
+        }
+
+
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .welcome-text h2 {
+                font-size: 2rem;
+            }
+
+            .welcome-text p {
+                font-size: 1rem;
+            }
+
+            .welcome-text .btn {
+                padding: 8px 16px;
+            }
+
+            .whatsapp-button {
+                bottom: 10px;
+                right: 10px;
+                padding: 10px;
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-text h2 {
+                font-size: 1.5rem;
+            }
+
+            .welcome-text p {
+                font-size: 0.875rem;
+            }
+
+            .welcome-text .btn {
+                padding: 6px 12px;
+            }
+
+            .whatsapp-button {
+                bottom: 5px;
+                right: 5px;
+                padding: 8px;
+                font-size: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-text {
+                text-align: center;
+                /* Center text and buttons inside welcome-text */
+                margin-top: 180px;
+                /* Adjust top margin as needed */
+                /* Adjust bottom margin as needed */
+            }
+
+            .welcome-text .btn {
+                display: inline-block;
+                /* Ensure buttons are inline and centered */
+                margin-top: 15px;
+                /* Adjust top margin for buttons */
+                padding: 8px 16px;
+                /* Example: Adjust padding for smaller screens */
+                font-size: 0.875rem;
+                /* Example: Adjust font size for smaller screens */
+            }
+
+            .welcome-text h2 {
+                text-align: center;
+                /* Center h2 headings */
+                font-size: 1.5rem;
+                /* Example: Adjust font size for smaller screens */
+                margin-top: 0;
+                /* Remove any unwanted top margin */
+            }
+
+            .welcome-text p {
+                text-align: center;
+                /* Center paragraphs */
+                font-size: 0.75rem;
+                /* Example: Adjust font size for smaller screens */
+            }
+
+            .form-container {
+                width: 90%;
+                /* Adjust width for smaller screens */
+                margin: 0 auto;
+                /* Center the form container */
+            }
+
+            .contact-inputs {
+                width: calc(100% - 50px);
+                /* Adjust input width */
+                margin-bottom: 15px;
+                /* Adjust margin as needed */
+            }
+
+            .contact-main textarea {
+                width: calc(100% - 50px);
+                /* Adjust textarea width */
+                margin-bottom: 15px;
+                /* Adjust margin as needed */
+            }
+
+            .contact-main button {
+                width: 100%;
+                /* Make button full width */
+                margin-top: 15px;
+                /* Adjust margin as needed */
+            }
+        }
+
+        @media (max-width: 400px) {
+            .footer-container {
+                margin-left: 24%;
+            }
+        }
+
+        .footer-content ul li a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .list li {
+            width: auto;
+            text-align: center;
+            list-style-type: none;
+            padding: 7px;
+            position: relative;
+        }
+
+        .list li::before {
+            content: '';
+            position: absolute;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            top: 100%;
+            height: 2px;
+            width: 0;
+            background-color: #b15f12;
+            transition-duration: .5s;
+        }
+
+        .list li:hover::before {
+            width: 70px;
+        }
+
+        .social-icons {
+            text-align: center;
+            padding: 0;
+        }
+
+        .social-icons li {
+            display: block;
+            text-align: center;
+            padding: 5px;
+
+        }
+
+        .social-icons i {
+            color: white;
+            font-size: 25px;
+        }
+
+        .social-icons a {
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            color: #f18930;
+        }
+
+        .social-icons li:hover {
+            color: #f18930;
+        }
+
+        .bottom-bar {
+            background-color: #f18930;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 50px;
+        }
+
+        @media (min-width: 768px) {
+
+            .footer-container,
+            .footer-content {
+                width: 45%;
+            }
+
+            .footer-content ul {
+                text-align: left;
+            }
+
+            .social-icons ul {
+                justify-content: flex-start;
+            }
+        }
+
+        @media (min-width: 768px) {
+
+            .footer-container,
+            .footer-content {
+                width: 30%;
+                /* Adjust to fit three items in a row */
+            }
+
+            .footer-content ul {
+                text-align: left;
+            }
+
+            .social-icons ul {
+                justify-content: center;
+            }
+        }
+
+        .background-overlay {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .background-overlay::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('your-image.jpg');
+            /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            filter: blur(4px);
+            /* Adjust the blur level as needed */
+            z-index: -2;
+        }
+
+        .background-overlay::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255, 144, 70, 0.082), rgba(126, 78, 23, 0.37));
+            /* Adjust gradient colors and opacity */
+            z-index: -1;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul class="sidebar">
+            <li onclick=hideSidebar()><a href="#"><img src="images/icons8-close-30.png"
+                        style="height: 27px; color: white;"></a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="about us.html">About</a></li>
+            <li><a href="Gallery.html">Gallery</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <ul>
+            <li><a href="#"><img src="images/Brice_logo-removebg-preview.png" style="height: 70px; color: white;"></a>
+            </li>
+            <li class="hideOnMobile"><a href="about us.html">About</a></li>
+            <li class="hideOnMobile"><a href="Gallery.html">Gallery</a></li>
+            <li class="hideOnMobile"><a href="#services">Services</a></li>
+            <li class="hideOnMobile"><a href="pricing.html">Pricing</a></li>
+            <li class="hideOnMobile"><a href="#contact">Contact</a></li>
+            <li class="hideOnMobile"><a href="portfolio.html">Portfolio</a></li>
+            <li class="menu-button" onclick=showSidebar()><a href="#"><img src="images/icons8-menu-30.png"
+                        style="height: 27px; width: 27px;"></a></li>
+        </ul>
+    </nav>
+
+
+    <div class="background-overlay">
+        <div class="welcome-text">
+            <h2>Welcome to <span id="typed-text">Brice Sound Hub Studio</span></h2>
+            <p style="font-weight: 400;">Experience the Gold standard in Sound And Music Production</p>
+            <a href="#services" class="btn">Discover Our Services</a>
+            <br>
+        </div>
+    </div>
+
+    <section id="about">
+        <div class="about-container" data-aos="fade-right" data-aos-duration="1500">
+            <h2>About Us</h2>
+            <p>Brice Sound Hub Studio is more than just being a recording studio. We are a creative sancuarity where
+                artists
+                <br> bring their vision to life. Our Team of professionals is dedicated to delivering an unparalleled
+                music
+                production experience.
+            </p>
+            <p>located in spruitview, vosloorus, our studio combines a cutting edge technology with a warm and inviting
+                Atmosphere.
+                Whether you're recording vocals, mixing tracks or mastering your album, we ensure avery detail is
+                meticulously
+                crafted
+                to achieve sonic excellence.
+            </p>
+            <br> <br> <br>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="services-container">
+            <h2 style="text-align: center;">Our Services</h2>
+            <div class="services-list">
+                <div class="service-card" data-aos="fade-right" data-aos-duration="1500"
+                    style="background-image: url(images/IMG-20240613-WA0115.jpg); width: 250px;">
+                    <div class="service-content">
+                        <h3>Recording</h3>
+                        <p>We Capture your sound with pristine clarity.</p>
+                    </div>
+                </div>
+                <div class="service-card" data-aos="fade-in" data-aos-duration="1500"
+                    style="background-image: url(images/IMG-20240613-WA0117.jpg);  width: 250px;">
+                    <div class="service-content">
+                        <h3>Mixing</h3>
+                        <p>We Balance and blend your tracks to perfection.</p>
+                    </div>
+                </div>
+                <div class="service-card" data-aos="flip-up" data-aos-duration="1500"
+                    style="background-image: url(images/IMG-20240613-WA0113.jpg);  width: 250px;">
+                    <div class="service-content">
+                        <h3>Mastering</h3>
+                        <p>We Polish your final product for commercial release.</p>
+                    </div>
+                </div>
+            </div> <br> <br> <br>
+            <a href="#contact" class="cta-button" style="text-align: center;">Book Your Session
+                Now</a>
+        </div>
+        <br> <br> <br>
+    </section>
+
+
+    <section id="contact">
+        <div class="contact-container">
+            <div class="form-container" data-aos="fade-in" data-aos-duration="1500">
+                <form action="https://api.web3forms.com/submit" method="POST" class="contact-main">
+                    <div class="contact-main-title">
+                        <h6 style="color: white;">Get in touch</h6>
+                        <hr>
+                    </div>
+                    <input type="hidden" name="access_key" value="76d06711-ba62-4798-9a85-567b297dda59">
+                    <input type="text" name="name" placeholder="Your name" class="contact-inputs" required>
+                    <input type="text" name="email" placeholder="Your email" class="contact-inputs" required>
+                    <textarea name="message" placeholder="Your message" class="contact-inputs"></textarea>
+                    <button type="submit" style=" text-align: center;">Submit</button>
+                </form>
+                <br>
+                <br>
+            </div>
+        </div>
+    </section>
+
+    <div class="map-container" style="margin-bottom: -20px;">
+        <p style="color: white; font-size: 13px; text-align: center; ">Use the map below to find our exact location. We
+            are looking forward to helping you create amazing music.</p>
+        <div class="map" style="margin-top:30px;">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3576.210012586787!2d28.18551847472783!3d-26.319698268686516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e951bea00ef7981%3A0x1d792550b30097db!2s155%20Selepe%20Cres%2C%20Spruitview%2C%20Vosloorus%2C%201486!5e0!3m2!1sen!2sza!4v1718637785485!5m2!1sen!2sza"
+                width="550" height="450" style="border-radius: 4px;" loading="fade-in"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <br> <br>
+    </div>
+    <footer style="background-color: #1d1e3d; overflow: hidden;">
+        <div class="container" style="width: 100%;
+        max-width: 1140px;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        text-align: center;
+        padding: 0 15px; /* Add padding to ensure content doesn't touch the edges */
+        box-sizing: border-box;">
+            <div class="footer-container">
+                <h3 style="font-size: 28px;  margin-bottom: 15px; text-align: center; color: white;">Contact Us</h3>
+                <p style="width: 190px; margin: auto; padding: 7px; color: white;">Email: bricemabuza@gmail.com</p>
+                <p style="width: 190px; margin: auto; padding: 7px; color: white;">Phone: +27 61 098 4523</p>
+                <p style="width: 190px; margin: auto; padding: 7px; color: white;">Address: 155 selepe cres, spruitview,
+                    vosloorus, 1486, south africa</p>
+            </div> <br> <br>
+            <div class="footer-content" style="width: 33.3%;">
+                <h3 style="font-size: 28px;  margin-bottom: 15px; text-align: center; color: white;">Quick Links</h3>
+                <ul class="list" style="text-align: center; padding: 0; text-decoration: none; color: white;">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#about">About</li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="Gallery.html">Gallery</a></li>
+                </ul>
+            </div>
+            <div class="footer-content">
+                <div class="social-icons">
+                    <h3 style="font-size: 28px;  margin-bottom: 15px; text-align: center; color: white;">Follow Us</h3>
+                    <li><a href="http://www.facebook.com/share/wmD5xwFjYP2tBPY7/?mibexid=qi2Omg"><i
+                                class="fab fa-facebook"></i></a></li>
+                    <li><a href="https://wa.me/+27610984523"><i class="fab fa-whatsapp"></i></a></li>
+                    <li><a href="https://www.tiktok.com/@bricemabuza1/video/7340696428630625542?_r=1&_t=8nPgzA1hvYj"><i
+                                class="fab fa-tiktok"></i></a></li>
+                    <li><a href="https://www.instagram.com/bricemabuza?igsh=MWc0a2NiNDl0anZjZA%3D%3D&utm_source=qr"><i
+                                class="fab fa-instagram"></i></a></li>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-bar">
+            <p>&copy; 2024 Brice Sound Hub Studio. All rights Reserved.</p>
+            <p>
+                <a href="#">Terms of Service</a> |
+                <a href="#">Privacy Policy</a>
+            </p>
+            <p href="#">Designed by Ndabezitha Software Solutions.</p>
+        </div>
+    </footer>
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        document.addEventListener('sroll', function () {
+            var button = document.querySelector('whatsap-button');
+            var scrolTop = window.pageYOffset || document.documentElement.scrollTop;
+            button.style.top = (scrollTop + window.innerHeight - 70) + 'px';
+        });
+
+    </script>
+    <script>
+        function showSidebar() {
+            const sidebar = document.querySelector('.sidebar')
+            sidebar.style.display = 'flex'
+        }
+        function hideSidebar() {
+            const sidebar = document.querySelector('.sidebar')
+            sidebar.style.display = 'none'
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="assets/js/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+
+    <script>
+        // Example JavaScript for making the WhatsApp button visible on scroll
+        window.addEventListener('scroll', function () {
+            var whatsappButton = document.querySelector('.whatsapp-button');
+            if (whatsappButton) {
+                if (window.scrollY > 100) { // Adjust as per your design
+                    whatsappButton.style.display = 'block';
+                } else {
+                    whatsappButton.style.display = 'none';
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

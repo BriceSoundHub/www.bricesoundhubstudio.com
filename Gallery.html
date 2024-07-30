@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Gallery</title>
+    <style>
+         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'inter';
+            box-sizing: border-box;
+        }
+        body {
+            background-color:#63431aa2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .gallery-container {
+            text-align: center;
+            max-width: 1200px;
+            width: 100%;
+            padding: 0 20px;
+            color: #ffffff; /* Adjust text color */
+        }
+        .gallery-text h1 {
+            color: #ffffff; /* Adjust text color */
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        .gallery-text p {
+            color: #ffffff; /* Adjust text color */
+            font-size: 1.2em;
+            margin-bottom: 50px;
+        }
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-gap: 30px;
+            justify-items: center;
+            align-items: center;
+        }
+        .image-gallery img {
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .image-gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            color: #000000;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 40px;
+            text-decoration: none;
+            z-index: 1000; /* Ensure it's above other content */
+            animation: blink 1s infinite; /* Blinking animation */
+            transition: background-color 0.3s ease-in-out;
+        }
+        .whatsapp-button:hover {
+            background-color: #128C7E; /* Darker shade of green */
+        }
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery-container">
+        <div class="gallery-text">
+            <h1>Brice Gallery</h1>
+            <p>Explore our studio, events, and sessions through these captivating images.</p>
+        </div>
+        <div class="image-gallery">
+            <img src="images/IMG-20240613-WA0095.jpg">
+            <img src="images/IMG-20240613-WA0096.jpg">
+            <img src="images/new2.jpg">
+            <img src="images/IMG-20240613-WA0120.jpg">
+            <img src="images/IMG-20240613-WA0119.jpg">
+            <img src="images/IMG-20240613-WA0102.jpg">
+            <img src="images/IMG-20240613-WA0115.jpg">
+            <img src="images/IMG-20240613-WA0097.jpg">
+            <img src="images/new1.jpg">
+            <img src="images/IMG-20240613-WA0105.jpg">
+            <img src="images/IMG-20240613-WA0108.jpg">
+            <img src="images/IMG-20240613-WA0113.jpg">
+            <img src="images/IMG-20240613-WA0109.jpg">
+            <img src="images/IMG-20240613-WA0101.jpg">
+            <img src="images/IMG-20240613-WA0104.jpg">
+            <img src="images/IMG-20240613-WA0103.jpg">
+            <img src="images/4.jpg">
+            <img src="images/5.jpg">
+            <img src="images/6.jpg">
+            <img src="images/7.jpg">
+            <img src="images/8.jpg">
+            <img src="images/9.jpg">
+        </div>
+    </div>
+    <a href="https://wa.me/+27610984523" class="whatsapp-button" target="_blank">
+        <i class="fab fa-whatsapp" style="font-size: 40px;"></i>
+    </a>
+</body>
+</html>
